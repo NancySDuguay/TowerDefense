@@ -3,6 +3,7 @@
 #include "TowerDefenseProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "Unit/Components/UnitHealthComponent.h"
 
 ATowerDefenseProjectile::ATowerDefenseProjectile() 
 {
@@ -37,7 +38,11 @@ void ATowerDefenseProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherA
 	if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-
+		Destroy();
+	}
+	else if (auto unitHealthComponent = OtherActor->FindComponentByClass<UUnitHealthComponent>())
+	{
+		unitHealthComponent->TakeDamage(Damage);
 		Destroy();
 	}
 }
