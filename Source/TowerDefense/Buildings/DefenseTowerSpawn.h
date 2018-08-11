@@ -19,6 +19,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=thing) USceneComponent* SpawnLocation;
 
 	FVector GetSpawnLocation() const;
+	FRotator GetSpawnRotation() const;
 	// Sets default values for this actor's properties
 
 protected:

@@ -20,6 +20,11 @@ FVector ADefenseTowerSpawn::GetSpawnLocation() const
 	return SpawnLocation->GetComponentLocation();
 }
 
+FRotator ADefenseTowerSpawn::GetSpawnRotation() const
+{
+	return SpawnLocation->GetComponentRotation();
+}
+
 // Called when the game starts or when spawned
 void ADefenseTowerSpawn::BeginPlay()
 {

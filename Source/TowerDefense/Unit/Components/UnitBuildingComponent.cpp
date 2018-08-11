@@ -31,11 +31,10 @@ void UUnitBuildingComponent::BuildTower()
 	if (_unitResourceComponent->CanSpendResource(500))
 	{
 		auto const spawnPoint = GetSpawnPointLocationClosestToPlayerView();
-		auto const location = spawnPoint->GetSpawnLocation();
+		GetOwner()->GetWorld()->SpawnActor<ATower>(_towerClass, spawnPoint->GetSpawnLocation(), spawnPoint->GetSpawnRotation());
 		RemoveFromPotentialSpawnPoints(spawnPoint);
 		spawnPoint->Destroy();
 		_unitResourceComponent->ModifyResources(-500);
-		GetOwner()->GetWorld()->SpawnActor<ATower>(_towerClass, location, FRotator::ZeroRotator);
 	}
 }
 
