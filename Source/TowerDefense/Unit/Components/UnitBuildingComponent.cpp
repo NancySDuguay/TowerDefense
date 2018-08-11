@@ -57,7 +57,7 @@ ADefenseTowerSpawn* UUnitBuildingComponent::GetSpawnPointLocationClosestToPlayer
 		if (angleSpawnPointToUnit < smallestAngle)
 		{
 			smallestAngle = angleSpawnPointToUnit;
-			bestSpawnPoint = _potentialSpawnPoints[0];
+			bestSpawnPoint = _potentialSpawnPoints[i];
 		}
 	}
 	return bestSpawnPoint.Get();
