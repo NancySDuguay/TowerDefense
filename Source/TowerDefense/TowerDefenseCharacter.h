@@ -50,10 +50,15 @@ class ATowerDefenseCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, Category = Resource) 
 	class UUnitResourceComponent* _unitResourceComponent;
 
+	/** Building component */
+	UPROPERTY(VisibleAnywhere, Category = Resource) 
+	class UUnitBuildingComponent* _unitBuildingComponent;
+
 public:
 	ATowerDefenseCharacter();
 
 	UFUNCTION(BlueprintCallable, Category=Components) UUnitResourceComponent* GetUnitResourceComponent() const { return _unitResourceComponent; }
+	UFUNCTION(BlueprintCallable, Category=Components) UUnitBuildingComponent* GetUnitBuildingComponent() const { return _unitBuildingComponent; }
 
 protected:
 	virtual void BeginPlay();
@@ -91,6 +96,9 @@ protected:
 	
 	/** Fires a projectile. */
 	void OnFire();
+
+	/** builds a tower. */
+	void Build();
 
 	/** Resets HMD orientation and position in VR. */
 	void OnResetVR();

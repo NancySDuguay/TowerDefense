@@ -15,6 +15,7 @@ class TOWERDEFENSE_API UUnitResourceComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UUnitResourceComponent();
+	bool CanSpendResource(int32 resourceNeeded) const { return _currentResources >= resourceNeeded; }
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=DefaultValues) int32 StartingResources = 1500;
 

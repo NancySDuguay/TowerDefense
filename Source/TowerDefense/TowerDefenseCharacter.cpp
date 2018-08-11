@@ -13,6 +13,7 @@
 #include "XRMotionControllerBase.h" // for FXRMotionControllerBase::RightHandSourceId
 #include "TowerDefenseGameState.h"
 #include "Unit/Components/UnitResourceComponent.h"
+#include "Unit/Components/UnitBuildingComponent.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -86,6 +87,7 @@ ATowerDefenseCharacter::ATowerDefenseCharacter()
 	//bUsingMotionControllers = true;
 
 	_unitResourceComponent = CreateDefaultSubobject<UUnitResourceComponent>(TEXT("Resource Component"));
+	_unitBuildingComponent = CreateDefaultSubobject<UUnitBuildingComponent>(TEXT("Building Component"));
 }
 
 void ATowerDefenseCharacter::BeginPlay()
@@ -127,6 +129,9 @@ void ATowerDefenseCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 
 	// Bind fire event
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ATowerDefenseCharacter::OnFire);
+
+	// Bind Build Event
+	PlayerInputComponent->BindAction("Build", IE_Pressed, this, &ATowerDefenseCharacter::Build);
 
 	// Enable touchscreen input
 	EnableTouchscreenMovement(PlayerInputComponent);
@@ -192,6 +197,11 @@ void ATowerDefenseCharacter::OnFire()
 			AnimInstance->Montage_Play(FireAnimation, 1.f);
 		}
 	}
+}
+
+void ATowerDefenseCharacter::Build()
+{
+	_unitBuildingComponent->BuildTower();
 }
 
 void ATowerDefenseCharacter::OnResetVR()

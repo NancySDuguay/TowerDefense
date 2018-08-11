@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Tower.h"
 #include "DefenseTowerSpawn.generated.h"
 
 UCLASS()
@@ -14,7 +15,6 @@ class TOWERDEFENSE_API ADefenseTowerSpawn : public AActor
 public:
 	ADefenseTowerSpawn();
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=thing) USceneComponent* Root;
-
 	/** location used to spawn the turret */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=thing) USceneComponent* SpawnLocation;
 
