@@ -39,7 +39,7 @@ void UUnitBuildingComponent::BuildTower()
 	}
 }
 
-// todo: this needs some love
+// todo: make it even better by choosing the one that the player is looking at.
 /** Get the spawn point closest to the player, this one will spawn a tower */
 ADefenseTowerSpawn* UUnitBuildingComponent::GetSpawnPointLocationClosestToPlayerView()
 {
