@@ -2,3 +2,7 @@
 
 #include "TowerDefenseGameState.h"
 
+ATowerDefenseGameState::ATowerDefenseGameState(): EventManager(nullptr)
+{
+	EventManager = CreateDefaultSubobject<UEventManager>(TEXT("Event Manager"));
+}

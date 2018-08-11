@@ -15,6 +15,8 @@ class TOWERDEFENSE_API ATowerDefenseGameState : public AGameStateBase
 {
 	GENERATED_BODY()
 
+	ATowerDefenseGameState();
 public:
 	UPROPERTY(BlueprintReadOnly, Category = "Events") UEventManager* EventManager;
+
 };

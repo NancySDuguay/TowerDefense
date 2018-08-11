@@ -108,7 +108,9 @@ void ATowerDefenseCharacter::BeginPlay()
 		Mesh1P->SetHiddenInGame(false, true);
 	}
 
-	//GetWorld()->GetGameState<ATowerDefenseGameState>()->EventManager->OnEnemyDeath.AddUniqueDynamic(_unitResourceComponent, &UUnitResourceComponent::ModifyResources);
+	auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
+	// todo: make this work!
+	gameState->EventManager->OnEnemyDeath.AddUniqueDynamic(_unitResourceComponent, &UUnitResourceComponent::ModifyResources);
 }
 
 //////////////////////////////////////////////////////////////////////////

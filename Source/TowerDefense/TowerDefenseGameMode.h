@@ -13,6 +13,8 @@ class ATowerDefenseGameMode : public AGameModeBase
 
 public:
 	ATowerDefenseGameMode();
+
+
 };
 
 
