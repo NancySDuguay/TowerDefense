@@ -26,6 +26,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-
+	int32 GetResourcesCount() const { return _currentResources; }
 	UFUNCTION() void ModifyResources(int32 resourceAmount);
 };
