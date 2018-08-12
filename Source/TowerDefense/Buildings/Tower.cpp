@@ -21,6 +21,10 @@ ATower::ATower()
 	TowerRange = CreateDefaultSubobject<USphereComponent>(TEXT("Range"));
 	TowerRange->AttachToComponent(Root, FAttachmentTransformRules::KeepRelativeTransform);
 
+	Muzzle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Muzzle"));
+	Muzzle->AttachToComponent(Root, FAttachmentTransformRules::KeepRelativeTransform);
+	Muzzle->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
 	TowerRange->OnComponentBeginOverlap.AddDynamic(this, &ATower::OnOverlapBegin);
 	TowerRange->OnComponentEndOverlap.AddDynamic(this, &ATower::OnOverlapEnd);
 
@@ -48,7 +52,11 @@ void ATower::OnOverlapEnd(UPrimitiveComponent* overlappedComponent, AActor* othe
 {
 	if (_enemiesInRange.Contains(otherActor))
 	{
-		_enemiesInRange.Remove(Cast<ACharacter>(otherActor)); SetActorTickEnabled(false); // No need to tick if there's no enemies around
+		_enemiesInRange.Remove(Cast<ACharacter>(otherActor)); 
+		if (_enemiesInRange.Num() == 0)
+		{
+			SetActorTickEnabled(false); // No need to tick if there's no enemies around
+		}
 	}
 }
 
@@ -61,6 +69,7 @@ void ATower::FireAtEnemy(FVector EnemyLocation) const
 		if (World != nullptr)
 		{
 			const auto spawnRotation = UKismetMathLibrary::FindLookAtRotation(LazerSpawnLocation->GetComponentLocation(), EnemyLocation);
+			Muzzle->SetWorldRotation(spawnRotation);
 			World->SpawnActor<ATowerDefenseProjectile>(ProjectileClass, LazerSpawnLocation->GetComponentLocation(), spawnRotation);
 		}
 	}
@@ -80,7 +89,7 @@ void ATower::Tick(float DeltaTime)
 	});
 
 	const auto towerLocation = LazerSpawnLocation->GetComponentLocation();
-	for (const auto enemy : _enemiesInRange)
+	for (const auto& enemy : _enemiesInRange)
 	{
 		const auto enemyLocation = enemy->GetMesh()->GetBoneLocation("spine_03");
 		// check if enemy can be shot at.

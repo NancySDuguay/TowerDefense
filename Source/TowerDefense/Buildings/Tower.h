@@ -23,6 +23,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly) USceneComponent* Root;
 	/** location used to spawn the turret */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly) USceneComponent* LazerSpawnLocation;
+	/** shape that rotates to where the turret is looking at */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) UStaticMeshComponent* Muzzle;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly) USphereComponent* TowerRange;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category=Fire) float FireRate = 180; // default to 3 bullets per second.
 
