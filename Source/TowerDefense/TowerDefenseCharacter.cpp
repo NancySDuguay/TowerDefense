@@ -88,6 +88,7 @@ ATowerDefenseCharacter::ATowerDefenseCharacter()
 
 	_unitResourceComponent = CreateDefaultSubobject<UUnitResourceComponent>(TEXT("Resource Component"));
 	_unitBuildingComponent = CreateDefaultSubobject<UUnitBuildingComponent>(TEXT("Building Component"));
+
 }
 
 void ATowerDefenseCharacter::BeginPlay()

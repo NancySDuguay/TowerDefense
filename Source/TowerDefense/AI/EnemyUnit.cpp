@@ -2,7 +2,7 @@
 
 #include "EnemyUnit.h"
 #include "TowerDefenseGameState.h"
-#include <Engine/World.h>
+#include "Engine/World.h"
 
 
 // Sets default values
@@ -12,7 +12,6 @@ AEnemyUnit::AEnemyUnit()
 	PrimaryActorTick.bCanEverTick = true;
 
 	_unitHealthComponent = CreateDefaultSubobject<UUnitHealthComponent>(TEXT("Health Component"));
-
 }
 
 // Called when the game starts or when spawned
