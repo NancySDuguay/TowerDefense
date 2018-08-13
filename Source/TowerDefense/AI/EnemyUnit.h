@@ -22,7 +22,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UUnitHealthComponent* _unitHealthComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) UUnitHealthComponent* _unitHealthComponent;
 
 public:
 	UFUNCTION(BlueprintCallable, Category=Components) UUnitHealthComponent* GetUnitComponent() const { return _unitHealthComponent; }
