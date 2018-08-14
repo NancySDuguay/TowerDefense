@@ -26,7 +26,7 @@ public:
 	/** shape that rotates to where the turret is looking at */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) UStaticMeshComponent* Muzzle;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly) USphereComponent* TowerRange;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category=Fire) float FireRate = 180; // default to 3 bullets per second.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Fire) float FireRate = 180; // default to 3 bullets per second.
 
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)

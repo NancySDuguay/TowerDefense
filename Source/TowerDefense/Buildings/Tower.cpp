@@ -6,6 +6,7 @@
 #include <Engine/World.h>
 #include <Components/SkeletalMeshComponent.h>
 #include "Kismet/KismetMathLibrary.h"
+#include "TowerDefenseGameState.h"
 
 
 // Sets default values
@@ -82,10 +83,20 @@ void ATower::Tick(float DeltaTime)
 
 	if (_isOnCooldown) return;
 
+	// check if any of the entries are dead enemies
 	_enemiesInRange.RemoveAllSwap([](TWeakObjectPtr<ACharacter> unit) { return !IsValid(unit.Get()); }); // remove invalid enemies (they've been killed).
-	_enemiesInRange.Sort([](TWeakObjectPtr<ACharacter> unitA, TWeakObjectPtr<ACharacter> unitB) // sort by distance of the goal
+	if (_enemiesInRange.Num() == 0)
 	{
-		return FVector::Dist(unitA->GetActorLocation(), FVector::ZeroVector) > FVector::Dist(unitB->GetActorLocation(), FVector::ZeroVector);
+		SetActorTickEnabled(false); // No need to tick if there's no enemies around
+		return;
+	}
+
+	// sort by distance of the goal
+	const auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
+	auto const goalLocation = gameState->GetEnemyGoalLocation();
+	_enemiesInRange.Sort([goalLocation](TWeakObjectPtr<ACharacter> unitA, TWeakObjectPtr<ACharacter> unitB)
+	{
+		return FVector::Dist(unitA->GetActorLocation(), goalLocation) > FVector::Dist(unitB->GetActorLocation(), goalLocation);
 	});
 
 	const auto towerLocation = LazerSpawnLocation->GetComponentLocation();
