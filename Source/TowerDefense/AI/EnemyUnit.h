@@ -7,7 +7,7 @@
 #include "Unit/Components/UnitHealthComponent.h"
 #include "EnemyUnit.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable, BlueprintType)
 class TOWERDEFENSE_API AEnemyUnit : public ACharacter
 {
 	GENERATED_BODY()

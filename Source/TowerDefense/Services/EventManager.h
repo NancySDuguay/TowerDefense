@@ -17,7 +17,12 @@ public:
 	UEventManager();
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDeathEvent, int32, moneyAmount);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameplayEvent);
 
 	UPROPERTY(BlueprintAssignable, Category = "Resource event")
 	FDeathEvent OnEnemyDeath;
+
+	
+	UPROPERTY(BlueprintAssignable, Category = "Gameplay event")
+	FGameplayEvent OnGameOver;
 };
