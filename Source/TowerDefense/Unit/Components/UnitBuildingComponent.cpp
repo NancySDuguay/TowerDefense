@@ -2,33 +2,26 @@
 
 #include "UnitBuildingComponent.h"
 #include "ConstructorHelpers.h"
-#include "Engine/World.h"
 #include "TowerDefenseGameState.h"
 
 
-// Sets default values for this component's properties
 UUnitBuildingComponent::UUnitBuildingComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
-	
-
+	// load the tower class.
 	static ConstructorHelpers::FClassFinder<ATower> TowerClass(TEXT("Blueprint'/Game/Buildings/BP_TowerSmall.BP_TowerSmall_C'"));
 	if (TowerClass.Succeeded())
 	{
 		_towerClass = TowerClass.Class;
 	}
-
-	// ...
 }
 
 void UUnitBuildingComponent::BuildTower()
 {
 	// Return if there's no potential tower spawn points.
 	if (_potentialSpawnPoints.Num() == 0) return;
-	// check if there's enough resources
+	// check if there's enough resources to build a tower
 	if (_unitResourceComponent->CanSpendResource(500))
 	{
 		auto const spawnPoint = GetSpawnPointLocationClosestToPlayerView();
@@ -37,21 +30,23 @@ void UUnitBuildingComponent::BuildTower()
 		spawnPoint->Destroy();
 		_unitResourceComponent->ModifyResources(-500);
 	} 
-	else
+	else // if there's not enough resources, event so that the UI can show an indication of why building didn't work.
 	{
 		const auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
 		gameState->GetEventManager()->TriedToOverSpend.Broadcast();
 	}
 }
 
-// todo: this needs some love
-/** Get the spawn point closest to the player, this one will spawn a tower */
+/** Get the tower spawn point closest to where the player is looking at */
 ADefenseTowerSpawn* UUnitBuildingComponent::GetSpawnPointLocationClosestToPlayerView()
 {
 	const auto playerPosition = GetOwner()->GetActorLocation();
 	const auto playerForwardVector = GetOwner()->GetActorForwardVector();
 
+	// if there's only one potential spawn point, return that one
 	if (_potentialSpawnPoints.Num() == 1) return _potentialSpawnPoints[0].Get();
+
+	// get the spawn point with the lowest angle with the character's forward vector
 	auto smallestAngle = acosf(FVector::DotProduct(_potentialSpawnPoints[0].Get()->GetSpawnLocation()-playerPosition, playerForwardVector));
 		FVector::Dist(_potentialSpawnPoints[0].Get()->GetSpawnLocation(), playerPosition);
 	auto bestSpawnPoint = _potentialSpawnPoints[0];
@@ -87,16 +82,4 @@ void UUnitBuildingComponent::BeginPlay()
 	Super::BeginPlay();
 
 	_unitResourceComponent = GetOwner()->FindComponentByClass<UUnitResourceComponent>();
-	// ...
-	
 }
-
-
-// Called every frame
-void UUnitBuildingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
-

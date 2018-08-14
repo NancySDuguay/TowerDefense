@@ -1,13 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tower.h"
-#include "GenericTeamAgentInterface.h"
 #include "AI/EnemyUnit.h"
-#include <Engine/World.h>
-#include <Components/SkeletalMeshComponent.h>
 #include "Kismet/KismetMathLibrary.h"
 #include "TowerDefenseGameState.h"
-
+#include "Components/SphereComponent.h"
 
 ATower::ATower()
 {

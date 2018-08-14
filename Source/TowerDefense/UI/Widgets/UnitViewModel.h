@@ -3,13 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
 #include "TowerDefenseCharacter.h"
+#include "UserWidget.h"
 #include "UnitViewModel.generated.h"
 
-/**
- * 
- */
+/** Viewmodel for hooking up to game events and getting the user's resources */
 UCLASS()
 class TOWERDEFENSE_API UUnitViewModel : public UUserWidget
 {

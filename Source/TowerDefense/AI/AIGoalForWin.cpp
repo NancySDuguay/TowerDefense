@@ -2,8 +2,7 @@
 
 #include "AIGoalForWin.h"
 #include "TowerDefenseGameState.h"
-#include "Engine/World.h"
-#include <Components/StaticMeshComponent.h>
+#include "Components/BoxComponent.h"
 #include "EnemyUnit.h"
 
 

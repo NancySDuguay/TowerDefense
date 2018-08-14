@@ -2,7 +2,6 @@
 
 #include "EnemyUnit.h"
 #include "TowerDefenseGameState.h"
-#include "Engine/World.h"
 
 
 // Sets default values

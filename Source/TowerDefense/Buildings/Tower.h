@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/SphereComponent.h"
 #include "TowerDefenseProjectile.h"
 #include "Tower.generated.h"
 
 class ACharacter;
+class USphereComponent;
 
+/** The tower which will shoot at any enemy close to it at a certain firerate. */
 UCLASS()
 class TOWERDEFENSE_API ATower : public AActor
 {

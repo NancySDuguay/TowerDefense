@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "Tower.h"
 #include "DefenseTowerSpawn.generated.h"
 

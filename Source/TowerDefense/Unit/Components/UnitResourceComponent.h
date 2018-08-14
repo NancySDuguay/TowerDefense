@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "UnitResourceComponent.generated.h"
 
 
@@ -13,7 +12,6 @@ class TOWERDEFENSE_API UUnitResourceComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
 	UUnitResourceComponent();
 	bool CanSpendResource(int32 resourceNeeded) const { return _currentResources >= resourceNeeded; }
 
@@ -23,7 +21,6 @@ private:
 	int32 _currentResources;
 
 protected:
-	// Called when the game starts
 	virtual void BeginPlay() override;
 
 public:	
