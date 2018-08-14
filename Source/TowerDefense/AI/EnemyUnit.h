@@ -12,25 +12,17 @@ class TOWERDEFENSE_API AEnemyUnit : public ACharacter
 {
 	GENERATED_BODY()
 
+	UUnitHealthComponent* _unitHealthComponent;
 public:
-	// Sets default values for this character's properties
 	AEnemyUnit();
 
+	/** the resource count the player will get if they kill an enemy. */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere) int32 RewardResources = 100;
+	
+	UFUNCTION(BlueprintCallable, Category=Components) UUnitHealthComponent* GetUnitComponent() const { return _unitHealthComponent; }
+	
+	UFUNCTION() void OnDeath();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) UUnitHealthComponent* _unitHealthComponent;
-
-public:
-	UFUNCTION(BlueprintCallable, Category=Components) UUnitHealthComponent* GetUnitComponent() const { return _unitHealthComponent; }
-	UFUNCTION() void OnDeath();
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-    
+	void BeginPlay() override;
 };

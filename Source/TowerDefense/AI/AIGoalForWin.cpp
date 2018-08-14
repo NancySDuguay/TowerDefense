@@ -7,10 +7,8 @@
 #include "EnemyUnit.h"
 
 
-// Sets default values
 AAIGoalForWin::AAIGoalForWin()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
 	_root = CreateDefaultSubobject<USceneComponent>("root");
@@ -23,6 +21,7 @@ AAIGoalForWin::AAIGoalForWin()
 	_goalTriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AAIGoalForWin::OnOverlap);
 }
 
+// when the enemy overlaps the goal trigger, it's game over
 void AAIGoalForWin::OnOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor,
 	UPrimitiveComponent* otherComp, int32 otherBodyIndex, bool bFromSweep, const FHitResult& sweepResult)
 {
@@ -32,11 +31,11 @@ void AAIGoalForWin::OnOverlap(UPrimitiveComponent* overlappedComponent, AActor* 
 	}
 }
 
-// Called when the game starts or when spawned
 void AAIGoalForWin::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Set the enemy goal location in the game state so that it can be accessed by all
 	const auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
 	gameState->SetEnemyGoalLocation(_goalTriggerBox->GetComponentLocation());
 }

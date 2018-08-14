@@ -9,10 +9,8 @@
 #include "TowerDefenseGameState.h"
 
 
-// Sets default values
 ATower::ATower()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	SetActorTickEnabled(false);
 
@@ -31,13 +29,6 @@ ATower::ATower()
 
 	_coolDownBetweenBullets = 60.f / FireRate; // 60 seconds in a minute, hence the "magic" number
 	_isOnCooldown = false;
-}
-
-// Called when the game starts or when spawned
-void ATower::BeginPlay()
-{
-	Super::BeginPlay();
-	
 }
 
 void ATower::OnOverlapBegin(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComp, int32 otherBodyIndex, bool bFromSweep, const FHitResult & sweepResult)
@@ -119,6 +110,7 @@ void ATower::Tick(float DeltaTime)
 
 void ATower::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+	// clearing the cooldown timer.
 	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 	Super::EndPlay(EndPlayReason);
 }

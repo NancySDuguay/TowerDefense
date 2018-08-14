@@ -29,17 +29,3 @@ void AEnemyUnit::OnDeath()
 	Destroy();
 }
 
-// Called every frame
-void AEnemyUnit::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
-// Called to bind functionality to input
-void AEnemyUnit::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
