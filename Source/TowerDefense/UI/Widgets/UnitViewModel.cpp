@@ -9,6 +9,7 @@ void UUnitViewModel::BindUnit(ATowerDefenseCharacter* unit)
 	_unit = unit;
 	const auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
 	gameState->GetEventManager()->OnGameOver.AddDynamic(this, &UUnitViewModel::OnGameOver);
+	gameState->GetEventManager()->TriedToOverSpend.AddDynamic(this, &UUnitViewModel::OnTriedToOverspend);
 }
 
 int32 UUnitViewModel::GetResources() const

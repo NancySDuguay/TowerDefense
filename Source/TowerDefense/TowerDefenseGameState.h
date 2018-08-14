@@ -18,13 +18,12 @@ class TOWERDEFENSE_API ATowerDefenseGameState : public AGameStateBase
 	ATowerDefenseGameState();
 
 	FVector _enemyGoalLocation = FVector::ZeroVector;
+	UEventManager* _eventManager;
 
 public:
-	UPROPERTY(BlueprintReadOnly, Category = "Events") UEventManager* EventManager;
+	// todo: Make a function library and call this function from there, since it'll be used often
+	UFUNCTION(BlueprintCallable) UEventManager* GetEventManager() const { return _eventManager; }
 
-	UFUNCTION(BlueprintCallable) UEventManager* GetEventManager() const { return EventManager; }
-
-	
 	void SetEnemyGoalLocation(FVector location);
 	UFUNCTION(BlueprintCallable) FVector GetEnemyGoalLocation() const { return _enemyGoalLocation; }
 };

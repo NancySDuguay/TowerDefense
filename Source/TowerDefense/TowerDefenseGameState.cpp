@@ -2,9 +2,9 @@
 
 #include "TowerDefenseGameState.h"
 
-ATowerDefenseGameState::ATowerDefenseGameState(): EventManager(nullptr)
+ATowerDefenseGameState::ATowerDefenseGameState(): _eventManager(nullptr)
 {
-	EventManager = CreateDefaultSubobject<UEventManager>(TEXT("Event Manager"));
+	_eventManager = CreateDefaultSubobject<UEventManager>(TEXT("Event Manager"));
 }
 
 void ATowerDefenseGameState::SetEnemyGoalLocation(FVector location)

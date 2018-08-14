@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UnitBuildingComponent.h"
-#include <ConstructorHelpers.h>
-#include <Engine/World.h>
+#include "ConstructorHelpers.h"
+#include "Engine/World.h"
+#include "TowerDefenseGameState.h"
 
 
 // Sets default values for this component's properties
@@ -35,6 +36,11 @@ void UUnitBuildingComponent::BuildTower()
 		RemoveFromPotentialSpawnPoints(spawnPoint);
 		spawnPoint->Destroy();
 		_unitResourceComponent->ModifyResources(-500);
+	} 
+	else
+	{
+		const auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
+		gameState->GetEventManager()->TriedToOverSpend.Broadcast();
 	}
 }
 

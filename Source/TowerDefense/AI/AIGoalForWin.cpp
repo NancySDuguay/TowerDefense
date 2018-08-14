@@ -28,7 +28,7 @@ void AAIGoalForWin::OnOverlap(UPrimitiveComponent* overlappedComponent, AActor* 
 {
 	if (otherActor->GetClass()->IsChildOf(AEnemyUnit::StaticClass())) {
 		const auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
-		gameState->EventManager->OnGameOver.Broadcast();
+		gameState->GetEventManager()->OnGameOver.Broadcast();
 	}
 }
 

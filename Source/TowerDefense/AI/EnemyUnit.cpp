@@ -25,7 +25,7 @@ void AEnemyUnit::BeginPlay()
 void AEnemyUnit::OnDeath()
 {
 	const auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
-	gameState->EventManager->OnEnemyDeath.Broadcast(RewardResources);
+	gameState->GetEventManager()->OnEnemyDeath.Broadcast(RewardResources);
 	Destroy();
 }
 

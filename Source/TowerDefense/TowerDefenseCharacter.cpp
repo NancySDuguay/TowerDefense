@@ -113,7 +113,7 @@ void ATowerDefenseCharacter::BeginPlay()
 
 	auto gameState = GetWorld()->GetGameState<ATowerDefenseGameState>();
 	// todo: make this work!
-	gameState->EventManager->OnEnemyDeath.AddUniqueDynamic(_unitResourceComponent, &UUnitResourceComponent::ModifyResources);
+	gameState->GetEventManager()->OnEnemyDeath.AddUniqueDynamic(_unitResourceComponent, &UUnitResourceComponent::ModifyResources);
 }
 
 //////////////////////////////////////////////////////////////////////////

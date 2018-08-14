@@ -25,4 +25,7 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, Category = "Gameplay event")
 	FGameplayEvent OnGameOver;
+
+	UPROPERTY(BlueprintAssignable, Category = "Gameplay event")
+	FGameplayEvent TriedToOverSpend;
 };
