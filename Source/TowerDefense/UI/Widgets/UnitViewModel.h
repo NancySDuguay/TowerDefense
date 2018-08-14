@@ -19,6 +19,6 @@ class TOWERDEFENSE_API UUnitViewModel : public UUserWidget
 
 public:
 	UFUNCTION(BlueprintCallable, Category=Resources) void BindUnit(ATowerDefenseCharacter* unit);
-
+	UFUNCTION(BlueprintImplementableEvent) void OnGameOver();
 	UFUNCTION(BlueprintCallable, Category=Resources) int32 GetResources() const;
 };
